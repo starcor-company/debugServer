@@ -1,4 +1,4 @@
-package kotlin.plugins.ui;
+package com.starcor.plugins.ui;
 
 import java.awt.*;
 

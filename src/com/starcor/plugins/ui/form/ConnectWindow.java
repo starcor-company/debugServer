@@ -1,6 +1,6 @@
-package kotlin.plugins.ui.form;
+package com.starcor.plugins.ui.form;
 
-import kotlin.plugins.ui.InitData;
+import com.starcor.plugins.ui.InitData;
 
 import javax.swing.*;
 
