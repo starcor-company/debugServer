@@ -2,7 +2,6 @@ package com.starcor.plugins.actions
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
-import com.starcor.plugins.server.ServerManager
 import com.starcor.plugins.ui.form.MainWindow
 
 /**
@@ -14,6 +13,5 @@ import com.starcor.plugins.ui.form.MainWindow
 class DebugPluginAction : AnAction() {
     override fun actionPerformed(anActionEvent: AnActionEvent) {
         MainWindow()
-        ServerManager.start()
     }
 }
