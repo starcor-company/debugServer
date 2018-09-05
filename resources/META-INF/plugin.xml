@@ -34,7 +34,6 @@
             icon="/icons/starcor_icon.png"
             description="debug plugin tools">
       <add-to-group group-id="NavBarToolBar" anchor="first"/>
-      <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt 6" second-keystroke="shift ctrl alt 6"/>
     </action>
   </actions>
 
