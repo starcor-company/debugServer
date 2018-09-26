@@ -2,6 +2,7 @@ package com.starcor.plugins.utils
 
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.swing.tree.TreeNode
 
 /**
  * author：MrLSM
@@ -15,7 +16,19 @@ object Utils {
         return dateFormat.format(Date())
     }
 
-    fun formatDate(t: Date): String {
-        return dateFormat.format(t)
+    fun formatDate(date: Date): String {
+        return dateFormat.format(date)
+    }
+
+    fun parseNodeToXML(treeNodes: List<TreeNode>) : String {
+        val xmlNodes = StringBuffer()
+        if (treeNodes.isNotEmpty()) {
+            xmlNodes.append("<data>")
+            treeNodes.indices
+                    .map { treeNodes[it] }
+                    .forEach { xmlNodes.append(it.toString()) }
+            xmlNodes.append("</data>")
+        }
+        return xmlNodes.toString()
     }
 }

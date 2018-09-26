@@ -18,9 +18,11 @@ class DebugServer : NanoHTTPD, IHttpServer {
     private var mStopTime: String = ""
 
     companion object {
-        var PORT: Int = 66668
+        var PORT: Int = 8888
         var HOST_NAME: String = "127.0.0.1"
     }
+
+    constructor() : this(HOST_NAME, PORT)
 
     constructor(hostName: String, port: Int) : super(hostName, port) {
         setAsyncRunner(NanoHTTPD.DefaultAsyncRunner())
@@ -56,8 +58,9 @@ class DebugServer : NanoHTTPD, IHttpServer {
 
     override fun serve(session: IHTTPSession?): Response {
         val msg = StringBuilder()
-        msg.append("<html><body><h1>Hello server</h1>\n")
-        msg.append(session.toString())
+        msg.append("<?xml version=\"1.0\" encoding=\"utf-8\" ?>")
+
+        msg.append(session?.parameters.toString())
         return NanoHTTPD.newFixedLengthResponse(msg.toString())
     }
 }
