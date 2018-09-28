@@ -1,5 +1,6 @@
-package com.starcor.plugins.ui
+package com.starcor.plugins.view
 
+import com.starcor.plugins.model.DataManager
 import java.awt.FlowLayout
 import java.awt.Font
 import java.awt.GridLayout
@@ -59,7 +60,7 @@ class AddApiWindow {
             override fun actionPerformed(e: ActionEvent) {
                 val apiName = apiNameJTextField.text
                 val apiFunction = apiFuncJTextField.text
-                //TODO 将添加的接口存储
+                DataManager.addApi(apiName, apiFunction)
                 jFrame.isVisible = false
             }
         })

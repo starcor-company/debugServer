@@ -1,4 +1,4 @@
-package com.starcor.plugins.ui
+package com.starcor.plugins.view
 
 import java.awt.FlowLayout
 import java.awt.Font
