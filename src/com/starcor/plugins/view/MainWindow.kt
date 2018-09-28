@@ -55,9 +55,17 @@ class MainWindow : MainWindowContract.View{
         menu.add(addMenu)
         menu.add(deleteMenu)
         val addApiMenu  = JMenuItem("添加接口")
-        addApiMenu.actionCommand = "add_api"
+        addApiMenu.addActionListener(object : ActionListener {
+            override fun actionPerformed(e: ActionEvent?) {
+                AddApiWindow().show()
+            }
+        })
         val addApiDataMenu  = JMenuItem("添加数据模版")
-        addApiDataMenu.actionCommand = "add_api_data_template"
+        addApiDataMenu.addActionListener(object : ActionListener {
+            override fun actionPerformed(e: ActionEvent?) {
+                AddDataTemplateWindow().show()
+            }
+        })
         val deleteApiMenu  = JMenuItem("删除接口")
         deleteApiMenu.actionCommand = "delete_api"
         val deleteApiDataMenu  = JMenuItem("删除数据模版")
