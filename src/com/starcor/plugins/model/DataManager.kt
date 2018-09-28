@@ -80,19 +80,23 @@ object DataManager {
     }
 
     private fun readFile(path: String): Any {
-        lateinit var fileOut: FileInputStream
-        lateinit var objectOut: ObjectInputStream
+        lateinit var fileIn: FileInputStream
+        lateinit var objectIn: ObjectInputStream
         lateinit var data: Any
         try {
-            fileOut = FileInputStream(path)
-            objectOut = ObjectInputStream(fileOut)
-            data = objectOut.readObject()
+            fileIn = FileInputStream(path)
+            objectIn = ObjectInputStream(fileIn)
+            data = objectIn.readObject()
         } catch (e: Exception) {
             e.printStackTrace()
         } finally {
             try {
-                fileOut.close()
-                objectOut.close()
+                fileIn.close()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+            try {
+                objectIn.close()
             } catch (e: Exception) {
                 e.printStackTrace()
             }
