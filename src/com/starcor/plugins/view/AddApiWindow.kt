@@ -44,23 +44,13 @@ class AddApiWindow {
         nameJPanel.add(apiNameJTextField)
         jFrame.add(nameJPanel, JPanel.CENTER_ALIGNMENT)
 
-        val functionJPanel = JPanel(FlowLayout())
-        val apiFunctionLabel = JLabel("api function: ", JLabel.CENTER)
-        apiFunctionLabel.font = commonFont
-        val apiFuncJTextField = JTextField(10)
-        apiFuncJTextField.font = commonFont
-        functionJPanel.add(apiFunctionLabel)
-        functionJPanel.add(apiFuncJTextField)
-        jFrame.add(functionJPanel, JPanel.CENTER_ALIGNMENT)
-
         val buttonJPanel = JPanel(FlowLayout())
         val confirmButton = JButton("confirm")
         confirmButton.font  = commonFont
         confirmButton.addActionListener(object : ActionListener {
             override fun actionPerformed(e: ActionEvent) {
                 val apiName = apiNameJTextField.text
-                val apiFunction = apiFuncJTextField.text
-                DataManager.addApi(apiName, apiFunction)
+                DataManager.addApi(apiName)
                 jFrame.isVisible = false
             }
         })

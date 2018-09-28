@@ -42,12 +42,12 @@ object DataManager {
     private fun refreshDataFile() {
         writeFile("$fileDir\\\\api_data", apiMap)
     }
-    fun addApi(name: String, function: String) {
+    fun addApi(name: String) {
         if (apiMap.containsKey(name)) {
             //TODO 弹窗提示重复
             return
         }
-        apiMap[name] = Api(name, function, HashMap(), "")
+        apiMap[name] = Api(name, HashMap(), "")
         refreshDataFile()
     }
 

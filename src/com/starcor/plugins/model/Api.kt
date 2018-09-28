@@ -7,4 +7,4 @@ import java.io.Serializable
  * date：2018/9/20
  * description：
  */
-data class Api(val name : String, val function : String, val dataTemplates : HashMap<String, String>, var currentDataTemplate : String) : Serializable
+data class Api(val name : String, val dataTemplates : HashMap<String, String>, var currentDataTemplate : String) : Serializable
