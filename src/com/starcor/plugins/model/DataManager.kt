@@ -48,11 +48,6 @@ object DataManager {
             return
         }
         apiMap[name] = Api(name, function, HashMap(), "")
-        var aaa = apiMap[name] as Api
-        aaa.dataTemplates["模版1"] = "模版1的数据"
-        aaa.dataTemplates["模版2"] = "模版2的数据"
-        aaa.dataTemplates["模版3"] = "模版3的数据"
-        aaa.dataTemplates["模版4"] = "模版4的数据"
         refreshDataFile()
     }
 
