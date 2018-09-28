@@ -27,7 +27,7 @@ class AddDataTemplateWindow {
         jFrame = JFrame("添加数据模版")
         jFrame.setSize(450, 250)
         jFrame.setLocationRelativeTo(null)
-        jFrame.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
+        jFrame.defaultCloseOperation = JFrame.DISPOSE_ON_CLOSE
         jFrame.layout = GridLayout(2,1)
 
         val commonFont = Font("", 0, 22)

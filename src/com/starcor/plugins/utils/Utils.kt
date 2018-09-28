@@ -1,5 +1,6 @@
 package com.starcor.plugins.utils
 
+import com.google.common.collect.Maps
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.swing.tree.TreeNode
@@ -30,5 +31,13 @@ object Utils {
             xmlNodes.append("</data>")
         }
         return xmlNodes.toString()
+    }
+
+    fun parseMapToXML(maps : MutableMap<String, String>) : String{
+        val xmlMaps = StringBuffer()
+        for ((key, value) in maps){
+            xmlMaps.append("<$key>$value</$key>")
+        }
+        return xmlMaps.toString()
     }
 }

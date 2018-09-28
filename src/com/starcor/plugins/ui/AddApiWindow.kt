@@ -6,6 +6,8 @@ import java.awt.GridLayout
 import javax.swing.*
 import java.awt.event.ActionListener
 import java.awt.event.ActionEvent
+import java.awt.event.WindowEvent
+import java.awt.event.WindowListener
 import javax.swing.JButton
 
 
@@ -27,7 +29,7 @@ class AddApiWindow {
         jFrame = JFrame("添加接口")
         jFrame.setSize(450, 250)
         jFrame.setLocationRelativeTo(null)
-        jFrame.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
+        jFrame.defaultCloseOperation = JFrame.DISPOSE_ON_CLOSE
         jFrame.layout = GridLayout(3,1)
 
         val commonFont = Font("", 0, 22)

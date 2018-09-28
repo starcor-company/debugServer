@@ -1,7 +1,15 @@
 package com.starcor.plugins.ui
 
 import java.awt.*
+import java.awt.event.ActionEvent
+import java.awt.event.ActionListener
+import java.awt.event.MouseAdapter
+import java.awt.event.MouseEvent
 import javax.swing.*
+import javax.swing.JDialog
+import com.sun.java.accessibility.util.AWTEventMonitor.addActionListener
+
+
 
 /**
  * author：heng.zhang
@@ -37,10 +45,12 @@ class MainWindow {
         deleteMenu.font =  addMenu.font
         menu.add(addMenu)
         menu.add(deleteMenu)
-        val addApiMenu  = JMenuItem("添加接口")
+        val addApiMenu = JMenuItem("添加接口")
         addApiMenu.actionCommand = "add_api"
-        val addApiDataMenu  = JMenuItem("添加数据模版")
+        addApiMenu.addActionListener { AddApiWindow().show() }
+        val addApiDataMenu = JMenuItem("添加数据模版")
         addApiDataMenu.actionCommand = "add_api_data_template"
+        addApiDataMenu.addActionListener { AddDataTemplateWindow().show() }
         val deleteApiMenu  = JMenuItem("删除接口")
         deleteApiMenu.actionCommand = "delete_api"
         val deleteApiDataMenu  = JMenuItem("删除数据模版")

@@ -59,8 +59,12 @@ class DebugServer : NanoHTTPD, IHttpServer {
     override fun serve(session: IHTTPSession?): Response {
         val msg = StringBuilder()
         msg.append("<?xml version=\"1.0\" encoding=\"utf-8\" ?>")
-
-        msg.append(session?.parameters.toString())
+        msg.append("<data>")
+        msg.append("<remoteIp>"+session?.remoteIpAddress+"</remoteIp>")
+        msg.append("<header>")
+        msg.append(Utils.parseMapToXML(session?.headers as MutableMap<String, String>))
+        msg.append("</header>")
+        msg.append("</data>")
         return NanoHTTPD.newFixedLengthResponse(msg.toString())
     }
 }

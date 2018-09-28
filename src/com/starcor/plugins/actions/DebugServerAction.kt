@@ -17,3 +17,9 @@ class DebugServerAction : AnAction() {
         DebugServer().startServer()
     }
 }
+
+
+fun main(args: Array<String>) {
+    MainWindow().show()
+    DebugServer().startServer()
+}
