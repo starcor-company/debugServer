@@ -20,8 +20,11 @@ object DataManager {
         readApiDataFile()
     }
 
-    fun readApiDataFile() {
-        apiMap.putAll(readFile("$fileDir\\\\api_data") as HashMap<String, Api>)
+    private fun readApiDataFile() {
+        val file = File("$fileDir\\\\api_data")
+        if (file.exists()) {
+            apiMap.putAll(readFile("$fileDir\\\\api_data") as HashMap<String, Api>)
+        }
     }
 
 
