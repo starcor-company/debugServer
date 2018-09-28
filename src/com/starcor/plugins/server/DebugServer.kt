@@ -1,8 +1,11 @@
 package com.starcor.plugins.server
 
+import com.starcor.plugins.model.Api
+import com.starcor.plugins.model.DataManager
 import com.starcor.plugins.utils.Utils
 import fi.iki.elonen.NanoHTTPD
 import java.io.IOException
+import java.net.InetAddress
 
 
 /**
@@ -18,13 +21,22 @@ class DebugServer : NanoHTTPD, IHttpServer {
     private var mStopTime: String = ""
 
     companion object {
-        var PORT: Int = 8888
-        var HOST_NAME: String = "127.0.0.1"
+        var PORT: Int = 7777
+        var HOST_NAME: String = InetAddress.getLocalHost().hostAddress
+    }
+
+    fun getHostAddress(): String {
+        return "http://$HOST_NAME:$PORT"
     }
 
     constructor() : this(HOST_NAME, PORT)
 
-    constructor(hostName: String, port: Int) : super(hostName, port) {
+    constructor(port: Int) : this(HOST_NAME, port){
+        PORT = port
+    }
+
+    private constructor(hostName: String, port: Int) : super(hostName, port) {
+        println("DebugServer: HOST_NAME = $hostName, PORT = $port")
         setAsyncRunner(NanoHTTPD.DefaultAsyncRunner())
         startServer()
     }
@@ -59,12 +71,10 @@ class DebugServer : NanoHTTPD, IHttpServer {
     override fun serve(session: IHTTPSession?): Response {
         val msg = StringBuilder()
         msg.append("<?xml version=\"1.0\" encoding=\"utf-8\" ?>")
-        msg.append("<data>")
-        msg.append("<remoteIp>"+session?.remoteIpAddress+"</remoteIp>")
-        msg.append("<header>")
-        msg.append(Utils.parseMapToXML(session?.headers as MutableMap<String, String>))
-        msg.append("</header>")
-        msg.append("</data>")
+        val name: String = session?.queryParameterString?.substring(8) ?: ""
+        val api : Api = DataManager.getApiDataByName(name)
+        msg.append(api.currentDataTemplate)
+//        msg.append("<epg><l><il></il></l><result><state>0</state><reason>OK</reason></result></epg>")
         return NanoHTTPD.newFixedLengthResponse(msg.toString())
     }
 }

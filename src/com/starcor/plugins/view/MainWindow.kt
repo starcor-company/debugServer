@@ -2,6 +2,7 @@ package com.starcor.plugins.view
 
 import com.starcor.plugins.contract.MainWindowContract
 import com.starcor.plugins.presenter.MainWindowPresenter
+import com.starcor.plugins.server.DebugServer
 import java.awt.*
 import java.awt.event.*
 import javax.swing.*
@@ -136,6 +137,16 @@ class MainWindow : MainWindowContract.View{
         gbc.fill = GridBagConstraints.BOTH
         val textAreaScrollPane = JScrollPane(textArea)
         editPanel.add(textAreaScrollPane, gbc)
+
+        val addressText = JLabel()
+        addressText.text = "request host address: " + DebugServer().getHostAddress()
+        addressText.font = Font("", 0, 20)
+        gbc.gridx = 0
+        gbc.gridy = 2
+        gbc.weightx = 1.0
+        gbc.weighty = 0.01
+        gbc.fill = GridBagConstraints.HORIZONTAL
+        jFrame.add(addressText, gbc)
     }
 
     private fun initUISelectedListener() {
