@@ -32,10 +32,10 @@ class MainWindow : MainWindowContract.View {
     }
 
     private fun initUI() {
-        jFrame = JFrame("DebugServer")
+        jFrame = MainFrame()
+        jFrame.title = "DebugServer"
         jFrame.setSize(1200, 900)
         jFrame.setLocationRelativeTo(null)
-        jFrame.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
         jFrame.layout = GridBagLayout()
         jFrame.addWindowListener(object : WindowAdapter() {
             override fun windowClosing(e: WindowEvent?) {
@@ -178,7 +178,7 @@ class MainWindow : MainWindowContract.View {
         editPanel.add(textAreaScrollPane, gbc)
 
         val addressText = JLabel()
-        addressText.text = "request host address: " + DebugServer().getHostAddress()
+        addressText.text = " request host address: " + DebugServer.getHostAddress()
         addressText.font = Font("", 0, 20)
         gbc.gridx = 0
         gbc.gridy = 2

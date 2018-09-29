@@ -3,6 +3,7 @@ package com.starcor.plugins.actions
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.starcor.plugins.model.DataManager
+import com.starcor.plugins.server.DebugServer
 import com.starcor.plugins.view.MainWindow
 
 /**
@@ -14,7 +15,7 @@ import com.starcor.plugins.view.MainWindow
 class DebugPluginAction : AnAction() {
     override fun actionPerformed(anActionEvent: AnActionEvent) {
         DataManager.init()
-        val mainWindow = MainWindow()
-        mainWindow.show()
+        MainWindow().show()
+        DebugServer.getInstance()?.startServer()
     }
 }

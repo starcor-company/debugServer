@@ -23,22 +23,30 @@ class DebugServer : NanoHTTPD, IHttpServer {
     companion object {
         var PORT: Int = 7777
         var HOST_NAME: String = InetAddress.getLocalHost().hostAddress
-    }
 
-    fun getHostAddress(): String {
-        return "http://$HOST_NAME:$PORT"
+        private var instance: DebugServer? = null
+
+        fun getInstance(): DebugServer? {
+            if (instance == null) {
+                instance = DebugServer()
+            }
+            return instance
+        }
+
+        fun getHostAddress(): String {
+            return "http://$HOST_NAME:$PORT"
+        }
     }
 
     constructor() : this(HOST_NAME, PORT)
 
-    constructor(port: Int) : this(HOST_NAME, port){
+    constructor(port: Int) : this(HOST_NAME, port) {
         PORT = port
     }
 
     private constructor(hostName: String, port: Int) : super(hostName, port) {
         println("DebugServer: HOST_NAME = $hostName, PORT = $port")
         setAsyncRunner(NanoHTTPD.DefaultAsyncRunner())
-        startServer()
     }
 
     override fun startServer() {
@@ -71,7 +79,7 @@ class DebugServer : NanoHTTPD, IHttpServer {
     override fun serve(session: IHTTPSession?): Response {
         val msg = StringBuilder()
         msg.append("<?xml version=\"1.0\" encoding=\"utf-8\" ?>")
-        var param : String = session?.queryParameterString!!
+        var param: String = session?.queryParameterString!!
         if (param.isNotEmpty()) {
             param = param.replaceAfter("&", "")
             param = param.substring(8)
