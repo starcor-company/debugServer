@@ -80,6 +80,11 @@ object DataManager {
         return apiMap[apiName] as Api
     }
 
+    fun setCurrentTemplate(data : String) {
+        currentApi.currentDataTemplate = data
+        apiMap[currentApi.name] = currentApi
+        refreshDataFile()
+    }
     private fun writeFile(path: String, data: Any) {
         lateinit var fileOut: FileOutputStream
         lateinit var objectOut: ObjectOutputStream

@@ -29,7 +29,7 @@ class MainWindowPresenter(override var view: MainWindowContract.View) : MainWind
     override fun refreshTemplateData(templateName: String) {
         val templateDataString = DataManager.currentApi.dataTemplates[templateName]
         if (templateDataString != null) {
-            DataManager.currentApi.currentDataTemplate = templateDataString
+            DataManager.setCurrentTemplate(templateDataString)
             view.fillTemplateDataString(templateDataString)
         }
     }
