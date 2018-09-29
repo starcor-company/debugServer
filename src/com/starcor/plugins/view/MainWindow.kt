@@ -13,17 +13,17 @@ import javax.swing.*
  * date：2018/9/4
  * description：
  */
-class MainWindow : MainWindowContract.View{
+class MainWindow : MainWindowContract.View {
 
     override lateinit var presenter: MainWindowContract.Presenter
 
-    private lateinit var jFrame : JFrame
-    private lateinit var apiJList : JList<String>
+    private lateinit var jFrame: JFrame
+    private lateinit var apiJList: JList<String>
     private lateinit var apiListModel: DefaultListModel<String>
-    private lateinit var dataTemplateComboBox : JComboBox<String>
+    private lateinit var dataTemplateComboBox: JComboBox<String>
     private lateinit var dataTemplateModel: DefaultComboBoxModel<String>
-    private lateinit var textArea : JTextArea
-    private lateinit var saveButton : JButton
+    private lateinit var textArea: JTextArea
+    private lateinit var saveButton: JButton
 
     constructor() {
         initUI()
@@ -33,7 +33,7 @@ class MainWindow : MainWindowContract.View{
 
     private fun initUI() {
         jFrame = JFrame("DebugServer")
-        jFrame.setSize(1200,900)
+        jFrame.setSize(1200, 900)
         jFrame.setLocationRelativeTo(null)
         jFrame.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
         jFrame.layout = GridBagLayout()
@@ -47,12 +47,12 @@ class MainWindow : MainWindowContract.View{
         val menu = JMenuBar()
         menu.border = BorderFactory.createLoweredSoftBevelBorder()
         val addMenu = JMenu("新建")
-        addMenu.font =  Font("", 1, 22)
+        addMenu.font = Font("", 1, 22)
         val deleteMenu = JMenu("删除")
-        deleteMenu.font =  addMenu.font
+        deleteMenu.font = addMenu.font
         menu.add(addMenu)
         menu.add(deleteMenu)
-        val addApiMenu  = JMenuItem("添加接口")
+        val addApiMenu = JMenuItem("添加接口")
         addApiMenu.font = Font("", 1, 20)
         addApiMenu.addActionListener {
             val addApiWindow = AddApiWindow()
@@ -60,10 +60,10 @@ class MainWindow : MainWindowContract.View{
                 override fun onConfirmButtonClick() {
                     presenter.refreshApiList()
                 }
-
             })
-            addApiWindow.show() }
-        val addApiDataMenu  = JMenuItem("添加数据模版")
+            addApiWindow.show()
+        }
+        val addApiDataMenu = JMenuItem("添加数据模版")
         addApiDataMenu.font = addApiMenu.font
         addApiDataMenu.addActionListener {
             val window = AddDataTemplateWindow()
@@ -76,10 +76,18 @@ class MainWindow : MainWindowContract.View{
             })
             window.show()
         }
-        val deleteApiMenu  = JMenuItem("删除接口")
+        val deleteApiMenu = JMenuItem("删除接口")
         deleteApiMenu.font = addApiMenu.font
-        deleteApiMenu.actionCommand = "delete_api"
-        val deleteApiDataMenu  = JMenuItem("删除数据模版")
+        deleteApiMenu.addActionListener {
+            val window = DeleteApiWindow()
+            window.addDeletedListener(object : DeleteApiWindow.ApiDeleteListener {
+                override fun onApiDeleted() {
+                    presenter.refreshApiList()
+                }
+            })
+            window.show()
+        }
+        val deleteApiDataMenu = JMenuItem("删除数据模版")
         deleteApiDataMenu.font = addApiMenu.font
         deleteApiDataMenu.actionCommand = "delete_api_data_template"
         addMenu.add(addApiMenu)
@@ -97,7 +105,7 @@ class MainWindow : MainWindowContract.View{
         gbc.weighty = 1.0
         gbc.fill = GridBagConstraints.BOTH
         val apiListPanel = JPanel()
-        apiListPanel.layout = GridLayout(1,1)
+        apiListPanel.layout = GridLayout(1, 1)
         apiListPanel.background = Color.decode("#dddddd")
         apiListPanel.border = BorderFactory.createLoweredBevelBorder()
         jFrame.add(apiListPanel, gbc)
@@ -125,7 +133,7 @@ class MainWindow : MainWindowContract.View{
         apiListPanel.add(apiJListScrollPane)
 
         //api数据列表下拉框
-        dataTemplateComboBox  = JComboBox()
+        dataTemplateComboBox = JComboBox()
         dataTemplateModel = DefaultComboBoxModel()
         dataTemplateComboBox.model = dataTemplateModel
         dataTemplateComboBox.font = Font("", 0, 22)
@@ -182,13 +190,15 @@ class MainWindow : MainWindowContract.View{
             }
         }
         saveButton.addActionListener {
-            presenter.saveTemplateData(dataTemplateComboBox.selectedItem.toString(),textArea.text) }
+            presenter.saveTemplateData(dataTemplateComboBox.selectedItem.toString(), textArea.text)
+        }
     }
+
     override fun initRefreshData(apiName: Set<String>) {
         refreshApiListModel(apiName)
     }
 
-    private fun refreshApiListModel(dataSet : Set<String>) {
+    private fun refreshApiListModel(dataSet: Set<String>) {
         apiListModel.clear()
         for (data in dataSet) {
             apiListModel.addElement(data)
@@ -198,7 +208,7 @@ class MainWindow : MainWindowContract.View{
         }
     }
 
-    override fun refreshDataTemplateModel(templateSet : Set<String>) {
+    override fun refreshDataTemplateModel(templateSet: Set<String>) {
         dataTemplateModel.removeAllElements()
         for (data in templateSet) {
             dataTemplateModel.addElement(data)

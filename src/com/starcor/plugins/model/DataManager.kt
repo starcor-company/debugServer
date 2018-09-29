@@ -42,6 +42,7 @@ object DataManager {
     private fun refreshDataFile() {
         writeFile("$fileDir\\\\api_data", apiMap)
     }
+
     fun addApi(name: String) {
         if (apiMap.containsKey(name)) {
             //TODO 弹窗提示重复
@@ -51,6 +52,13 @@ object DataManager {
         refreshDataFile()
     }
 
+
+    fun deletaApi(name: String) {
+        if (apiMap.containsKey(name)) {
+            apiMap.remove(name)
+            refreshDataFile()
+        }
+    }
     fun addDataTemplate(name: String) {
         if (currentApi.dataTemplates.containsKey(name)) {
             //TODO 弹窗提示重复
