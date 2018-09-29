@@ -32,7 +32,7 @@ class MainWindow : MainWindowContract.View {
     }
 
     private fun initUI() {
-        jFrame = MainFrame()
+        jFrame = JFrame()
         jFrame.title = "DebugServer"
         jFrame.setSize(1200, 900)
         jFrame.setLocationRelativeTo(null)
@@ -40,7 +40,7 @@ class MainWindow : MainWindowContract.View {
         jFrame.addWindowListener(object : WindowAdapter() {
             override fun windowClosing(e: WindowEvent?) {
                 presenter.onMainWindowClose()
-                System.exit(0)
+                jFrame.isVisible = false
             }
         })
 

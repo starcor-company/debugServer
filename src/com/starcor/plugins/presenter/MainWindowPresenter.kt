@@ -2,6 +2,7 @@ package com.starcor.plugins.presenter
 
 import com.starcor.plugins.contract.MainWindowContract
 import com.starcor.plugins.model.DataManager
+import com.starcor.plugins.server.DebugServer
 
 /**
  * author：heng.zhang
@@ -40,5 +41,6 @@ class MainWindowPresenter(override var view: MainWindowContract.View) : MainWind
 
     override fun onMainWindowClose() {
         DataManager.refreshDataFile()
+        DebugServer.getInstance()?.stopServer()
     }
 }
