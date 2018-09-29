@@ -1,7 +1,6 @@
 package com.starcor.plugins.presenter
 
 import com.starcor.plugins.contract.DeleteApiWindowContract
-import com.starcor.plugins.contract.MainWindowContract
 import com.starcor.plugins.model.DataManager
 
 /**
@@ -15,15 +14,15 @@ class DeleteApiPresenter(override var view: DeleteApiWindowContract.View) : Dele
         view.presenter = this
     }
     override fun start() {
-        fillTemplateListData()
+        fillApiListData()
     }
 
-    override fun fillTemplateListData() {
+    override fun fillApiListData() {
         val apiNameSet = DataManager.getApiNameSet()
         view.initRefreshData(apiNameSet)
     }
 
     override fun deleteApi(apiName: String) {
-        DataManager.deletaApi(apiName)
+        DataManager.deleteApi(apiName)
     }
 }

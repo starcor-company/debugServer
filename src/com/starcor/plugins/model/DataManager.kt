@@ -53,7 +53,7 @@ object DataManager {
     }
 
 
-    fun deletaApi(name: String) {
+    fun deleteApi(name: String) {
         if (apiMap.containsKey(name)) {
             apiMap.remove(name)
             refreshDataFile()
@@ -67,6 +67,14 @@ object DataManager {
         currentApi.dataTemplates[name] = ""
         apiMap[currentApi.name] = currentApi
         refreshDataFile()
+    }
+
+    fun deleteDataTemplate(name: String) {
+        if (currentApi.dataTemplates.containsKey(name)) {
+            currentApi.dataTemplates.remove(name)
+            apiMap[currentApi.name] = currentApi
+            refreshDataFile()
+        }
     }
     fun getApiDataByName(apiName: String): Api {
         return apiMap[apiName] as Api

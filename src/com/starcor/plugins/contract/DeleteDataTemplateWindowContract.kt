@@ -8,13 +8,13 @@ import com.starcor.plugins.view.BaseView
  * date：2018/9/28
  * description：
  */
-class DeleteApiWindowContract {
+class DeleteDataTemplateWindowContract {
     interface View : BaseView<Presenter> {
-        fun initRefreshData(apiNameSet : Set<String>)
+        fun initRefreshData(templateNameSet : Set<String>)
     }
 
     interface Presenter : BasePresenter<View> {
-        fun fillApiListData()
-        fun deleteApi(apiName : String)
+        fun fillTemplateListData()
+        fun deleteTemplate(templateName : String)
     }
 }

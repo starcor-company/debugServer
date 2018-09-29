@@ -87,13 +87,23 @@ class MainWindow : MainWindowContract.View {
             })
             window.show()
         }
-        val deleteApiDataMenu = JMenuItem("删除数据模版")
-        deleteApiDataMenu.font = addApiMenu.font
-        deleteApiDataMenu.actionCommand = "delete_api_data_template"
+        val deleteDataTemplateMenu = JMenuItem("删除数据模版")
+        deleteDataTemplateMenu.font = addApiMenu.font
+
+        deleteDataTemplateMenu.addActionListener {
+            val window = DeleteDataTemplateWindow()
+            window.addDeletedListener(object : DeleteDataTemplateWindow.DataTemplateDeleteListener {
+                override fun onDataTemplateDeleted() {
+                    textArea.text = ""
+                    presenter.refreshTemplateList(apiJList.selectedValue)
+                }
+            })
+            window.show()
+        }
         addMenu.add(addApiMenu)
         addMenu.add(addApiDataMenu)
         deleteMenu.add(deleteApiMenu)
-        deleteMenu.add(deleteApiDataMenu)
+        deleteMenu.add(deleteDataTemplateMenu)
         jFrame.jMenuBar = menu
 
         val gbc = GridBagConstraints()
