@@ -1,17 +1,16 @@
 <idea-plugin>
   <id>com.starcor.debug.server</id>
-  <name>debugTools developer</name>
+  <name>模拟数据插件工具</name>
   <version>1.0</version>
   <vendor email="shuangmeng.li@starcor.com" url="http://www.starcor.com">Starcor</vendor>
 
   <description><![CDATA[
-      Enter short description for your plugin here.<br>
-      <em>most HTML tags may be used</em>
+      模拟数据服务器，用于添加模拟数据，调试相关接口<br>
+      <em>Analog data server for adding simulated data and debugging related interfaces</em>
     ]]></description>
 
   <change-notes><![CDATA[
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>
+      2018/9/29 : version 1.0 release<br>
     ]]>
   </change-notes>
 
