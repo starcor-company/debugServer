@@ -31,8 +31,10 @@
     <actions>
         <group id="starcor.terminal.Menu.test" text="_视达科终端插件" description="视达科终端插件">
             <add-to-group group-id="MainMenu" anchor="last"/>
+            <add-to-group group-id="NavBarToolBar" anchor="first"/>
             <action id="plugin.debug.tools" class="com.starcor.plugins.actions.DebugPluginAction"
                     text="debug_plugin"
+                    icon="/icons/starcor_icon.png"
                     description="debug plugin tools">
             </action>
         </group>

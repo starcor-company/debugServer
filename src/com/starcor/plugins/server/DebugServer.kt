@@ -71,10 +71,17 @@ class DebugServer : NanoHTTPD, IHttpServer {
     override fun serve(session: IHTTPSession?): Response {
         val msg = StringBuilder()
         msg.append("<?xml version=\"1.0\" encoding=\"utf-8\" ?>")
-        val name: String = session?.queryParameterString?.substring(8) ?: ""
-        val api : Api = DataManager.getApiDataByName(name)
-        msg.append(api.currentDataTemplate)
-//        msg.append("<epg><l><il></il></l><result><state>0</state><reason>OK</reason></result></epg>")
+        var param : String = session?.queryParameterString!!
+        if (param.isNotEmpty()) {
+            param = param.replaceAfter("&", "")
+            param = param.substring(8)
+        }
+        try {
+            val api: Api = DataManager.getApiDataByName(param)
+            msg.append(api.currentDataTemplate)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
         return NanoHTTPD.newFixedLengthResponse(msg.toString())
     }
 }
