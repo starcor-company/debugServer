@@ -39,6 +39,7 @@ class MainWindow : MainWindowContract.View {
         jFrame.layout = GridBagLayout()
         jFrame.addWindowListener(object : WindowAdapter() {
             override fun windowClosing(e: WindowEvent?) {
+                presenter.onMainWindowClose()
                 System.exit(0)
             }
         })

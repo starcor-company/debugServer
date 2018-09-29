@@ -37,4 +37,8 @@ class MainWindowPresenter(override var view: MainWindowContract.View) : MainWind
     override fun saveTemplateData(templateName : String, templateData : String) {
         DataManager.saveTemplateData(templateName, templateData)
     }
+
+    override fun onMainWindowClose() {
+        DataManager.refreshDataFile()
+    }
 }

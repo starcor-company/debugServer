@@ -36,10 +36,9 @@ object DataManager {
         currentApi.currentDataTemplate = data
         currentApi.dataTemplates[key] = data
         apiMap[currentApi.name] = currentApi
-        refreshDataFile()
     }
 
-    private fun refreshDataFile() {
+    fun refreshDataFile() {
         writeFile("$fileDir\\\\api_data", apiMap)
     }
 
@@ -49,14 +48,12 @@ object DataManager {
             return
         }
         apiMap[name] = Api(name, HashMap(), "")
-        refreshDataFile()
     }
 
 
     fun deleteApi(name: String) {
         if (apiMap.containsKey(name)) {
             apiMap.remove(name)
-            refreshDataFile()
         }
     }
     fun addDataTemplate(name: String) {
@@ -66,14 +63,12 @@ object DataManager {
         }
         currentApi.dataTemplates[name] = ""
         apiMap[currentApi.name] = currentApi
-        refreshDataFile()
     }
 
     fun deleteDataTemplate(name: String) {
         if (currentApi.dataTemplates.containsKey(name)) {
             currentApi.dataTemplates.remove(name)
             apiMap[currentApi.name] = currentApi
-            refreshDataFile()
         }
     }
     fun getApiDataByName(apiName: String): Api {
@@ -83,7 +78,6 @@ object DataManager {
     fun setCurrentTemplate(data : String) {
         currentApi.currentDataTemplate = data
         apiMap[currentApi.name] = currentApi
-        refreshDataFile()
     }
     private fun writeFile(path: String, data: Any) {
         lateinit var fileOut: FileOutputStream
