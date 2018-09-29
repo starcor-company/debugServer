@@ -16,6 +16,7 @@ class MainWindowContract {
     }
 
     interface Presenter : BasePresenter<View> {
+        fun refreshApiList()
         fun refreshTemplateList(apiName : String)
         fun refreshTemplateData(templateName : String)
         fun saveTemplateData(templateName : String, templateData : String)

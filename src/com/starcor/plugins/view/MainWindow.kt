@@ -6,8 +6,6 @@ import com.starcor.plugins.server.DebugServer
 import java.awt.*
 import java.awt.event.*
 import javax.swing.*
-import javax.swing.event.ListSelectionEvent
-import javax.swing.event.ListSelectionListener
 
 
 /**
@@ -55,17 +53,17 @@ class MainWindow : MainWindowContract.View{
         menu.add(addMenu)
         menu.add(deleteMenu)
         val addApiMenu  = JMenuItem("添加接口")
-        addApiMenu.addActionListener(object : ActionListener {
-            override fun actionPerformed(e: ActionEvent?) {
-                AddApiWindow().show()
-            }
-        })
+        addApiMenu.addActionListener {
+            val addApiWindow = AddApiWindow()
+            addApiWindow.addActionListener(object : AddApiWindow.ActionListener {
+                override fun onConfirmButtonClick() {
+                    presenter.refreshApiList()
+                }
+
+            })
+            addApiWindow.show() }
         val addApiDataMenu  = JMenuItem("添加数据模版")
-        addApiDataMenu.addActionListener(object : ActionListener {
-            override fun actionPerformed(e: ActionEvent?) {
-                AddDataTemplateWindow().show()
-            }
-        })
+        addApiDataMenu.addActionListener { AddDataTemplateWindow().show() }
         val deleteApiMenu  = JMenuItem("删除接口")
         deleteApiMenu.actionCommand = "delete_api"
         val deleteApiDataMenu  = JMenuItem("删除数据模版")
@@ -158,7 +156,11 @@ class MainWindow : MainWindowContract.View{
     }
 
     private fun initUISelectedListener() {
-        apiJList.addListSelectionListener { presenter.refreshTemplateList(apiJList.selectedValue) }
+        apiJList.addListSelectionListener {
+            if (apiJList.selectedValue != null) {
+                presenter.refreshTemplateList(apiJList.selectedValue)
+            }
+        }
         dataTemplateComboBox.addItemListener { e ->
             if (e?.stateChange == ItemEvent.SELECTED) {
                 presenter.refreshTemplateData(dataTemplateComboBox.selectedItem.toString())
