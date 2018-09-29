@@ -1,6 +1,6 @@
 <idea-plugin>
   <id>com.starcor.debug.server</id>
-  <name>模拟数据插件工具</name>
+  <name>Analog data plugin tool</name>
   <version>1.0</version>
   <vendor email="shuangmeng.li@starcor.com" url="http://www.starcor.com">Starcor</vendor>
 
