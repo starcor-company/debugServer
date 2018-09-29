@@ -51,6 +51,15 @@ object DataManager {
         refreshDataFile()
     }
 
+    fun addDataTemplate(name: String) {
+        if (currentApi.dataTemplates.containsKey(name)) {
+            //TODO 弹窗提示重复
+            return
+        }
+        currentApi.dataTemplates[name] = ""
+        apiMap[currentApi.name] = currentApi
+        refreshDataFile()
+    }
     fun getApiDataByName(apiName: String): Api {
         return apiMap[apiName] as Api
     }

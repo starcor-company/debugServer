@@ -1,11 +1,10 @@
 package com.starcor.plugins.view
 
+import com.starcor.plugins.model.DataManager
 import java.awt.FlowLayout
 import java.awt.Font
 import java.awt.GridLayout
 import javax.swing.*
-import java.awt.event.ActionListener
-import java.awt.event.ActionEvent
 import javax.swing.JButton
 
 
@@ -18,6 +17,7 @@ import javax.swing.JButton
  */
 class AddDataTemplateWindow {
     private lateinit var jFrame: JFrame
+    private lateinit var confirmButtonlsr : ConfirmButtonListener
 
     constructor() {
         initUI()
@@ -25,7 +25,7 @@ class AddDataTemplateWindow {
 
     private fun initUI() {
         jFrame = JFrame("添加数据模版")
-        jFrame.setSize(450, 250)
+        jFrame.setSize(400, 200)
         jFrame.setLocationRelativeTo(null)
         jFrame.defaultCloseOperation = JFrame.DISPOSE_ON_CLOSE
         jFrame.layout = GridLayout(2,1)
@@ -35,27 +35,32 @@ class AddDataTemplateWindow {
         val nameJPanel = JPanel(FlowLayout())
         val nameLabel = JLabel("template name:    ")
         nameLabel.font = commonFont
-        val apiNameJTextField = JTextField(10)
-        apiNameJTextField.font = commonFont
+        val templateNameJTextField = JTextField(10)
+        templateNameJTextField.font = commonFont
         nameJPanel.add(nameLabel)
-        nameJPanel.add(apiNameJTextField)
+        nameJPanel.add(templateNameJTextField)
         jFrame.add(nameJPanel, JPanel.CENTER_ALIGNMENT)
 
         val buttonJPanel = JPanel(FlowLayout())
         val confirmButton = JButton("confirm")
         confirmButton.font  = commonFont
-        confirmButton.addActionListener(object : ActionListener {
-            override fun actionPerformed(e: ActionEvent) {
-                val apiName = apiNameJTextField.text
-                //TODO 将添加的数据模版存储
-                jFrame.isVisible = false
-            }
-        })
+        confirmButton.addActionListener {
+            val templateName = templateNameJTextField.text
+            DataManager.addDataTemplate(templateName)
+            confirmButtonlsr.onConfirmButtonClick()
+            jFrame.isVisible = false
+        }
         buttonJPanel.add(confirmButton, JButton.CENTER)
         jFrame.add(buttonJPanel)
     }
 
     fun show() {
         jFrame.isVisible = true
+    }
+    fun addActionListener(lsr : ConfirmButtonListener) {
+        confirmButtonlsr = lsr
+    }
+    interface ConfirmButtonListener {
+        fun onConfirmButtonClick()
     }
 }

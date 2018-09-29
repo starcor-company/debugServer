@@ -47,12 +47,13 @@ class MainWindow : MainWindowContract.View{
         val menu = JMenuBar()
         menu.border = BorderFactory.createLoweredSoftBevelBorder()
         val addMenu = JMenu("新建")
-        addMenu.font =  Font("", 1, 18)
+        addMenu.font =  Font("", 1, 22)
         val deleteMenu = JMenu("删除")
         deleteMenu.font =  addMenu.font
         menu.add(addMenu)
         menu.add(deleteMenu)
         val addApiMenu  = JMenuItem("添加接口")
+        addApiMenu.font = Font("", 1, 20)
         addApiMenu.addActionListener {
             val addApiWindow = AddApiWindow()
             addApiWindow.addActionListener(object : AddApiWindow.ActionListener {
@@ -63,10 +64,23 @@ class MainWindow : MainWindowContract.View{
             })
             addApiWindow.show() }
         val addApiDataMenu  = JMenuItem("添加数据模版")
-        addApiDataMenu.addActionListener { AddDataTemplateWindow().show() }
+        addApiDataMenu.font = addApiMenu.font
+        addApiDataMenu.addActionListener {
+            val window = AddDataTemplateWindow()
+            window.addActionListener(object : AddDataTemplateWindow.ConfirmButtonListener {
+                override fun onConfirmButtonClick() {
+                    if (apiJList.selectedValue != null) {
+                        presenter.refreshTemplateList(apiJList.selectedValue)
+                    }
+                }
+            })
+            window.show()
+        }
         val deleteApiMenu  = JMenuItem("删除接口")
+        deleteApiMenu.font = addApiMenu.font
         deleteApiMenu.actionCommand = "delete_api"
         val deleteApiDataMenu  = JMenuItem("删除数据模版")
+        deleteApiDataMenu.font = addApiMenu.font
         deleteApiDataMenu.actionCommand = "delete_api_data_template"
         addMenu.add(addApiMenu)
         addMenu.add(addApiDataMenu)
@@ -157,6 +171,7 @@ class MainWindow : MainWindowContract.View{
 
     private fun initUISelectedListener() {
         apiJList.addListSelectionListener {
+            textArea.text = ""
             if (apiJList.selectedValue != null) {
                 presenter.refreshTemplateList(apiJList.selectedValue)
             }

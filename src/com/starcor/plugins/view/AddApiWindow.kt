@@ -25,7 +25,7 @@ class AddApiWindow {
 
     private fun initUI() {
         jFrame = JFrame("添加接口")
-        jFrame.setSize(400, 150)
+        jFrame.setSize(400, 200)
         jFrame.setLocationRelativeTo(null)
         jFrame.defaultCloseOperation = JFrame.DISPOSE_ON_CLOSE
         jFrame.layout = GridLayout(2,1)
