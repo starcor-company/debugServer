@@ -10,13 +10,14 @@
 
 - 使用github仓库存储代码，使用git提交流程
 - 使用Kotlin编程
-- 使用Jfinal开发框架 https://www.w3cschool.cn/jfinal/
 - 完成Plugin开发
+- 使用 [NanoHttpd 框架](https://github.com/NanoHttpd/nanohttpd "NanoHttpd 框架")
 
 #### 使用说明
 
 1. 安装插件：
-	- 打开idea 或者 android studio 插件管理工具，选择从桌面安装，安装完成后重启idea或者android studio
+	- **手动安装:**
+  		- 下载[`最新发布的插件包`][latest-release] -> <kbd>Preferences(Settings)</kbd> > <kbd>Plugins</kbd> > <kbd>Install plugin from disk...</kbd>
 	- 完成安装后可见，如下图，点击即可使用
 	![](https://i.imgur.com/5A1eIOq.png)
 2. 使用相关
@@ -29,3 +30,9 @@
 	- 如使用xul框架访问，示例如下图：
 	![](https://i.imgur.com/2ZlR3t1.png)
 	
+更新日志
+--------
+## [v1.0](https://github.com/mrlsm/debugServer/releases) (2018-09-29)
+
+- 模拟数据需求完成
+- 1.0 版本发布
